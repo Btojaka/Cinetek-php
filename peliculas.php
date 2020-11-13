@@ -1,3 +1,7 @@
+<?php
+include('funciones.php');
+?>
+
 <!DOCTYPE html>
 
 <head>
@@ -17,7 +21,33 @@
     </div>
     <div class="container">
         <div class="row mx-auto">
+        <h2>Listado de películas:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Año</th>
+                    <th>Duración</th>
+                </tr>
+            </thead>
+            <tbody>
             <!-- INCLUIR CÓDIGO PHP -->
+            <?php
+            $array = get_dataMovies("bbdd/peliculas.csv");
+
+            for ($i=0 ; $i < count($array) ; $i++) {
+                echo "<tr>";
+                for ($j=0; $j < count($array[$i]); $j++) {
+                echo "<td>".$array[$i][$j]."</td>";
+                }
+                echo "</tr>";
+            }
+            ?>
+
+                       
+            </tbody>
+        </table>
         </div>
     </div>
 </body>
