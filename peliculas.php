@@ -1,5 +1,5 @@
 <?php
-include('funciones.php');
+include('lib/utils.php');
 ?>
 
 <!DOCTYPE html>
@@ -21,33 +21,35 @@ include('funciones.php');
     </div>
     <div class="container">
         <div class="row mx-auto">
-        <h2>Listado de películas:</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Año</th>
-                    <th>Duración</th>
-                </tr>
-            </thead>
-            <tbody>
+
             <!-- INCLUIR CÓDIGO PHP -->
             <?php
             $array = get_dataMovies("bbdd/peliculas.csv");
+            //var_dump($array);
+            echo "<br>";
 
+            $pelisAsocia = null;
             for ($i=0 ; $i < count($array) ; $i++) {
-                echo "<tr>";
-                for ($j=0; $j < count($array[$i]); $j++) {
-                echo "<td>".$array[$i][$j]."</td>";
-                }
-                echo "</tr>";
+                echo "<br>";
+                //for ($j=0; $j < count($array[$i]); $j++) {
+                    $pelisAsocia['ID'] = $array[$i][0];
+                    $pelisAsocia['Nombre'] = $array[$i][1];
+                    $pelisAsocia['Año'] = $array[$i][2];
+                    $pelisAsocia['Duración'] = $array[$i][3];
+
+                    var_dump($pelisAsocia);
+                    
+                echo "<br>";
             }
+            // for ($i=0 ; $i < count($array) ; $i++) {
+            //     echo "<br>";
+            //     for ($j=0; $j < count($array[$i]); $j++) {
+            //     echo $array[$i][$j]."</br>";
+            //     }
+            //     echo "<br>";
+            // }
             ?>
 
-                       
-            </tbody>
-        </table>
         </div>
     </div>
 </body>
