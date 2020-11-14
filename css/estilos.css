@@ -8,3 +8,23 @@ a.custom-card,
 a.custom-card:hover {
   color: inherit;
 }
+
+#editar {
+  padding: 0.5rem;
+  font-weight: 400;
+  color: purple;
+  background: white;
+  font-size: 1.2vw;
+  border-radius: 0.5rem;
+  position: relative;
+  /* center the button */
+  left: 50%;
+  transform: translate(-50%, 0%);
+  transition: all ease 2s;
+}
+
+#editar:hover {
+  background-color: purple;
+  color: white;
+  font-weight: 400;
+}
