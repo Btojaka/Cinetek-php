@@ -12,7 +12,7 @@ include('lib/utils.php');
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
@@ -21,27 +21,36 @@ include('lib/utils.php');
     </div>
     <div class="container">
         <div class="row mx-auto">
-        <h2>Listado de películas:</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Año</th>
-                    <th>Duración</th>
-                </tr>
-            </thead>
-            <tbody>
+            <div class="portada">
+                <a href=""><img src="imgs/peliculas/1.jpg" width="150" height="300"alt="" ></a>
+                <div class="botones">
+                    <button id="editar">Editar</button>
+                    <button id="borrar">Borrar</button>
+                </div>
+            </div>
+            <div class="portada">
+                <a href=""><img src="imgs/peliculas/2.jpg" width="150" height="300" alt=""></a>
+                <div class="botones">
+                    <button id="editar">Editar</button>
+                    <button id="borrar">Borrar</button>
+                </div>
+            </div>
+            <div class="portada">
+                <a href=""><img src="imgs/peliculas/3.jpg" width="150" height="300" alt=""></a>
+                <div class="botones">
+                    <button id="editar">Editar</button>
+                    <button id="borrar">Borrar</button>
+                </div>
+            </div>
+            <div class="portada">
+                <a href=""><img src="imgs/peliculas/4.jpg" width="150" height="300" alt=""></a>
+                <div class="botones">
+                    <button id="editar">Editar</button>
+                    <button id="borrar">Borrar</button>
+                </div>
+            </div>
             <!-- INCLUIR CÓDIGO PHP -->
             <?php
-            $array = get_dataMovies("bbdd/peliculas.csv");
-            for ($i=0 ; $i < count($array) ; $i++) {
-                echo "<tr>";
-                for ($j=0; $j < count($array[$i]); $j++) {
-                    echo "<td>".$array[$i][$j]."</td>";
-                }
-                echo "</tr>";
-            }
             ?>
             </tbody>
         </table>
