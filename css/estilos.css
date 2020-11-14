@@ -8,23 +8,65 @@ a.custom-card,
 a.custom-card:hover {
   color: inherit;
 }
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Paytone One', sans-serif;
+  /*overflow: hidden;*/
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  width: 100vw;
+  height: 100vh;
+}
+.portada{
+  width: 10vw;
+  height: 35vh;
+  background-color: khaki;
+  
+}
 
-#editar {
+
+.botones #borrar {
   padding: 0.5rem;
-  font-weight: 400;
-  color: purple;
-  background: white;
-  font-size: 1.2vw;
+  font-weight: 200;
+  font-size: 0.90vw;
   border-radius: 0.5rem;
-  position: relative;
+  color: white;
+  background: rgb(173, 50, 102);
+
+
   /* center the button */
-  left: 50%;
-  transform: translate(-50%, 0%);
-  transition: all ease 2s;
+  /* left: 25%; */
+  /* transform: translate(-50%, 0%); */
+  
+  /* transition: all ease 0.5s; */
+  
+}
+
+.botones #editar {
+  padding:0.5rem;
+  font-weight: 200;
+  font-size: 0.90vw;
+  border-radius: 0.5rem;
+  color: white;
+  background: rgba(10, 141, 124, 0.637);
+  /* center the button */
+  /* left: 25%; */
+  /* transform: translate(-50%, 0%); */
+  
+  /* transition: all ease 0.5s; */
+  
 }
 
 #editar:hover {
-  background-color: purple;
+  background-color: rgb(17, 236, 46);
+  color: white;
+  font-weight: 400;
+}
+
+#borrar:hover {
+  background-color: rgb(238, 20, 20);
   color: white;
   font-weight: 400;
 }

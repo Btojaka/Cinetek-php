@@ -22,35 +22,27 @@ include('lib/utils.php');
     <div class="container">
         <div class="row mx-auto">
             <div class="portada">
-                <a href=""><img src="imgs/peliculas/1.jpg" width="150" height="300"alt="" ></a>
                 <div class="botones">
                     <button id="editar">Editar</button>
                     <button id="borrar">Borrar</button>
                 </div>
             </div>
-            <div class="portada">
-                <a href=""><img src="imgs/peliculas/2.jpg" width="150" height="300" alt=""></a>
-                <div class="botones">
-                    <button id="editar">Editar</button>
-                    <button id="borrar">Borrar</button>
-                </div>
-            </div>
-            <div class="portada">
-                <a href=""><img src="imgs/peliculas/3.jpg" width="150" height="300" alt=""></a>
-                <div class="botones">
-                    <button id="editar">Editar</button>
-                    <button id="borrar">Borrar</button>
-                </div>
-            </div>
-            <div class="portada">
-                <a href=""><img src="imgs/peliculas/4.jpg" width="150" height="300" alt=""></a>
-                <div class="botones">
-                    <button id="editar">Editar</button>
-                    <button id="borrar">Borrar</button>
-                </div>
-            </div>
+            
             <!-- INCLUIR CÓDIGO PHP -->
             <?php
+            // lee el fichero de peliculas
+            $array = get_dataCsv("bbdd/peliculas.csv");
+            // var_dump($array);
+            // echo "<br>";
+            // echo "<br>";
+            // // retorna el ID y el Nombre de la pelicula en un array
+            // $arrayDatos = getIdyName($array);
+            // var_dump("id y nom: ".$arrayDatos);
+
+            
+            
+
+
             ?>
             </tbody>
         </table>

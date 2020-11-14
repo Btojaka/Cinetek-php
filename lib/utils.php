@@ -1,6 +1,6 @@
 <?php
 // lee el fichero peliculas.csv
-function get_dataMovies($nombreFichero){
+function get_dataCsv($nombreFichero){
     $archivo = fopen($nombreFichero, "r");
 
     if($archivo) {
@@ -20,6 +20,19 @@ function get_dataMovies($nombreFichero){
     
     return $arrayLineas;
 
+}
+
+function getIdyName($nomArray){
+    for ($i=0 ; $i < count($nomArray) ; $i++) {
+        for ($j=0; $j < count($nomArray[$i]); $j++) {
+            $numId = $nomArray[$i][0];
+            $nom = $nomArray[$i][1];
+        }
+        echo " $numId : $nom ";
+        echo "<br>";
+    }
+
+    return $array($numId, $nom);
 }
 
 // function asociar($nom_arrayLineas){
