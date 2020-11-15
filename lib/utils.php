@@ -22,31 +22,22 @@ function get_dataCsv($nombreFichero){
 
 }
 
-function getIdyName($nomArray){
-    for ($i=0 ; $i < count($nomArray) ; $i++) {
-        for ($j=0; $j < count($nomArray[$i]); $j++) {
-            $numId = $nomArray[$i][0];
-            $nom = $nomArray[$i][1];
-        }
-        echo " $numId : $nom ";
-        echo "<br>";
+function get_Portadas($nombreArray){
+
+    for ($i=0; $i < count($nombreArray); $i++){
+        $id= $nombreArray[$i][0];
+        $nombre = $nombreArray[$i][1];
+        $archivoJpg = $id.'.jpg';
+        $carpeta = 'imgs/peliculas/';
+        $dir = $carpeta.$archivoJpg;  // Ruta donde se guarda la imagen
+        $imgag = "<img src='$dir' alt='Esta es la portada' width = 175 height= 300;>";
+        $enlace = "<a href=''>$imgag</a>";
+        $titulo = "<p>$nombre</p>";
+        $botones = "<div class='botones'><button id='editar'>Editar</button><button id='borrar'>Borrar</button></div>";
+        $portada = "<div class='portada'>$enlace $titulo $botones</div>";
+
+        echo $portada;
     }
 
-    return $array($numId, $nom);
 }
-
-// function asociar($nom_arrayLineas){
-//     $pelisAsocia = null;
-//     for ($i=0 ; $i < count($nom_arrayLineas) ; $i++) {
-//         echo "<br>";
-//         for ($j=0; $j < count($array[$i]); $j++) {
-//             $pelisAsocia['ID'] = $arrayLineas[$i][0];
-//             $pelisAsocia['Nombre'] = $arrayLineas[$i][1];
-
-//             echo $array[$i][$j]."</br>";
-//         }
-//         echo "<br>";
-//     }
-
-// }
 ?>
