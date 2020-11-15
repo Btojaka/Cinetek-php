@@ -30,13 +30,13 @@ function get_Portadas($nombreArray){
         $archivoJpg = $id.'.jpg';
         $carpeta = 'imgs/peliculas/';
         $dir = $carpeta.$archivoJpg;  // Ruta donde se guarda la imagen
-        $imgag = "<img src='$dir' alt='Esta es la portada' width = 175 height= 300;>";
+        $imgag = "<img src='$dir' alt='Esta es la portada' width = 175 height= 300>";
         $enlace = "<a href=''>$imgag</a>";
         $titulo = "<p>$nombre</p>";
         $botones = "<div class='botones'><button id='editar'>Editar</button><button id='borrar'>Borrar</button></div>";
         $portada = "<div class='portada'>$enlace $titulo $botones</div>";
 
-        echo $portada;
+        echo $portada;  
     }
 
 }
