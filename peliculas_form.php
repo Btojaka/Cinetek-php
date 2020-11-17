@@ -1,3 +1,7 @@
+<?php
+include('lib/utils.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,9 +15,22 @@
 </head>
 
 <body>
+<div class="alert alert-secondary d-flex">
+        <a href="./peliculas_form.php" class="btn btn-dark">Formulario</a>&nbsp;&nbsp;
+    </div>
     <div class="container">
+        <label for='titulo'>Título:</label><br>
+        <input type='text' id='titulo'><br><br>
         <h1>Edición de películas</h1>
-		 <!-- INCLUIR CÓDIGO PHP -->
+        <!-- INCLUIR CÓDIGO PHP -->
+        <?
+         // crear el formulario y lo muestra 
+        $formulario = crearForm();
+        echo $formulario;
+        
+
+
+        ?>
 
 
     </div>
