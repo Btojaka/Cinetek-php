@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="alert alert-success" role="alert">
+    <a href="./peliculas.php" class="btn btn-dark">Películas</a>&nbsp;&nbsp;
             <!-- INCLUIR CÓDIGO PHP -->
 
     

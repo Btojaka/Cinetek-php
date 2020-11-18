@@ -18,8 +18,7 @@
     <div class="container">
        <!-- INCLUIR CÓDIGO PHP -->
        <?php
-        echo "Estás en la pagina de fichas";
-        echo "el id que ha llegado aqui es: $id_peli";  
+        echo $_GET['id']; 
        ?>
 
     </div>

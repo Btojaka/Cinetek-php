@@ -16,20 +16,20 @@ include('lib/utils.php');
 
 <body>
 <div class="alert alert-secondary d-flex">
-        <a href="./peliculas_form.php" class="btn btn-dark">Formulario</a>&nbsp;&nbsp;
+<a href="./peliculas.php" class="btn btn-dark">Películas</a>&nbsp;&nbsp;
     </div>
     <div class="container">
-        <label for='titulo'>Título:</label><br>
-        <input type='text' id='titulo'><br><br>
         <h1>Edición de películas</h1>
         <!-- INCLUIR CÓDIGO PHP -->
         <?
-         // crear el formulario y lo muestra 
-        $formulario = crearForm();
-        echo $formulario;
-        
-
-
+        //tener en cuenta la validacion isset... pattern EVITAR CODIGO MALICIOSO html (PARTE CLIENTE Y EN EL SERVIDOR) PRUEBAS
+         // crear el formulario relleno con datos pelicula y lo muestra 
+        $id = $_GET['id'];
+        $titol = $_GET['nombre'];
+        $any = $_GET['anyo'];
+        $duracio = $_GET['duracion'];
+        crearForm($id, $titol, $any, $duracio);
+ 
         ?>
 
 
