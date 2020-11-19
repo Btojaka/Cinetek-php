@@ -21,9 +21,7 @@ include('lib/utils.php');
             <!-- INCLUIR CÓDIGO PHP -->
             <?php
                 $id = $_GET['id'];
-                echo $id;
                 $titol = $_GET['titulo'];
-                echo $titol;
                 $any = $_GET['anyo'];
                 $duracio = $_GET['duracion'];
                 editar_pelicula($id, $titol, $any, $duracio);

@@ -1,4 +1,17 @@
 <?php
+define ('PELISCSV','bbdd/peliculas.csv');
+
+// busca la posiciónj del elemento a través del id
+function buscarPosicion($id, $array){
+    for($i=0; $i<count($array); $i++){
+        if($array[$i][0]== $id){
+            return $i;
+        }
+    }
+    return false;
+
+}
+
 // lee el fichero peliculas.csv
 function get_dataCsv($nombreFichero){
     $archivo = fopen($nombreFichero, "r");
@@ -61,70 +74,81 @@ function crearForm($id, $title, $year, $length){
 
 /* borrará la pelicula que le indiquemos mediante el id
  (borrará la linea del fichero donde aparece) */
-function borrar_pelicula($nombreArchivo, $numId){
-    //leemos el archivo 
-    $fichero = fopen($nombreArchivo, "r");
-    // almacenara los datos
-    $datos = "";
-    // contador de lineas
-    $i =0;
-    if ($fichero) {
-        while (($linea = fgets($fichero)) !== false) {
-            // aumentamos en 1 la linea
-            $i++;
-            // borramos espacios de mas con trim()
-            $linea = trim(preg_replace('/\s+/', ' ', $linea));
-            /* validamos que sea una linea en blanco o el numero de linea especificado 
-            y saltamos a la siguiente interacion */
-            if ($linea == "" || $numId == ($i -1)) {
-                continue;
-            }
-            // almacenamos los resultados
-            $datos .= $linea."\n";  
-        }
-        // cerramos el archivo
-        fclose($fichero);
-    } else {
-    die(" No se pudo abrir el archivo $nombreArchivo");
-    }
+function borrar_pelicula($numId){
+    $archivo = fopen(PELISCSV, "r");
+    $mensaje = "<div id='exito'>La pelicula ha sido borrada con éxito</div>";
 
-    // reabrimos en modo escritura
-    $fichero = fopen($nombreArchivo, "w+");
-    // escribimos la nueva data
-    fwrite($fichero, $datos);
-    // cerramos el archivo
-    fclose($fichero);
+    if($archivo) {
+        $linea = fgetcsv($archivo, ","); // de cada linea coge lo que haya entre "," en este caso
+        $arrayLineas = null;
+        $contador = 0;
+        while ($linea !== false) {
+        // almacenamos en un array los datos leídos
+        $arrayLineas[$contador] = $linea;
+        $contador++;
+        $linea = fgetcsv($archivo, ",");
+        }
+    } else {
+    echo "El fichero no existe";
+    }
+    fclose($archivo);
+    $posicion = buscarPosicion($numId, $arrayLineas); // averigua la posicion que hay que borrar
+    $aux = array_splice ( $arrayLineas , $posicion,1);
+    var_dump($aux);
+    var_dump($arrayLineas);
+
+    $archivo = fopen(PELISCSV, "w");
+    // modifica archivo original
+    foreach ($arrayLineas as $linea) {
+        fputcsv($archivo,$linea,","); // escribe contenido nuevo
+    }
+    echo $mensaje;
+    fclose($archivo);
+
+
 }
 
 // sobreescribirá los campos indicados y mostrará un mensaje al completar la acción.
-function editar_pelicula($id, $dato1, $dato2, $dato3){
-    $array = file($archivo); // lo carga a un vector
+function editar_pelicula($numid, $dato1, $dato2, $dato3){
+    
+    $archivo = fopen(PELISCSV, "r");
     $mensaje = "<div id='exito'>La pelicula ha sido guardada con éxito</div>";
-    foreach($array as $key => $linea){  // recorre el vector pareseando las líneas
-        $lineal = explode(',', $linea); //LINEAL
-        if ($linea[0] == $id){ 
-            // si encuentra la línea modifica el contenido
-            $lineal[1] = $dato1;
-            $lineal[2] = $dato2;
-            $lineal[3] = $dato3;
-            // reorganiza la cadena
-            $temporal = implode(',', $lineal);
-            // la asigna al vector en la posición orginal
-            $array[$key] = $temporal;
-            // sale del foreach, porque no tiene sentido seguir buscando.
-            break;
-            }
-        }
-    // Guarda el vector resultado sobreescribiendo el archivo
-    // Unir archivo
-    $contenido = implode(PHP_EOL,$array);
-    $abrir = fopen($archivo,'w');
-    fwrite($abrir,$contenido);
-    fclose($abrir);
-    echo $mensaje;
 
+    if($archivo) {
+        $linea = fgetcsv($archivo, ","); // de cada linea coge lo que haya entre "," en este caso
+        $arrayLineas = null;
+        $contador = 0;
+        while ($linea !== false) {
+        // almacenamos en un array los datos leídos
+        $arrayLineas[$contador] = $linea;
+        $contador++;
+        $linea = fgetcsv($archivo, ",");
+        }
+    } else {
+    echo "El fichero no existe";
+    }
+    fclose($archivo);
+
+
+    $posicion = buscarPosicion($numid, $arrayLineas); // averigua la posicion que hay que sobreescribir
+
+    // reescribimos los datos en la posición del array auxiliar 
+    $arrayLineas[$posicion][1]= $dato1;
+    $arrayLineas[$posicion][2]= $dato2;
+    $arrayLineas[$posicion][3]= $dato3;
+    
+    //var_dump($arrayLineas[$posicion]); // PUEBAS
+    //chmod(PELISCSV, 0777);
+    $archivo = fopen(PELISCSV, "w");
+    // modifica archivo original
+    foreach ($arrayLineas as $linea) {
+        fputcsv($archivo,$linea,","); // escribe contenido nuevo
+    }
+    echo $mensaje;
+    fclose($archivo);
     
 }
 
-?>
+// ESTOY POR AQUI: crear 2 funciones (trozo de arriba que se repite en borrar y editar y trozo de abajo)
 
+?>

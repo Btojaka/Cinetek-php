@@ -1,3 +1,6 @@
+<?php
+include('lib/utils.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,6 +16,11 @@
 <div class="alert alert-success" role="alert">
     <a href="./peliculas.php" class="btn btn-dark">Películas</a>&nbsp;&nbsp;
             <!-- INCLUIR CÓDIGO PHP -->
+            
+            <?php
+            $id = $_GET['id'];
+            borrar_pelicula($id);
+            ?>
 
     
 </body>

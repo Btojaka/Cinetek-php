@@ -24,7 +24,7 @@ include('lib/utils.php');
             <!-- INCLUIR CÓDIGO PHP -->
             <?php
             // lee el fichero de peliculas
-            $array = get_dataCsv("bbdd/peliculas.csv");
+            $array = get_dataCsv(PELISCSV);
             // crea portadas con funcionalidades y las muestra al usuario
             get_Portadas($array);
             ?>
