@@ -20,19 +20,13 @@ include('lib/utils.php');
     </div>
     <div class="container">
         <h1>Edición de películas</h1>
-        <!-- INCLUIR CÓDIGO PHP -->
-        <?
-        //tener en cuenta la validacion isset... pattern EVITAR CODIGO MALICIOSO html (PARTE CLIENTE Y EN EL SERVIDOR) PRUEBAS
-         // crear el formulario relleno con datos pelicula y lo muestra 
-        $id = $_GET['id'];
-        $titol = $_GET['nombre'];
-        $any = $_GET['anyo'];
-        $duracio = $_GET['duracion'];
-        crearForm($id, $titol, $any, $duracio);
- 
+        <?php
+            $id = $_GET['id'];
+            $titol = $_GET['nombre'];
+            $any = $_GET['anyo'];
+            $duracio = $_GET['duracion'];
+            crearForm($id, $titol, $any, $duracio);
         ?>
-
-
     </div>
 
 </body>

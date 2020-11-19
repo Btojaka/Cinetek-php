@@ -28,8 +28,6 @@ include('lib/utils.php');
             // crea portadas con funcionalidades y las muestra al usuario
             get_Portadas($array);
             ?>
-            </tbody>
-        </table>
         </div>
     </div>
 </body>
