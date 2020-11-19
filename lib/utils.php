@@ -1,5 +1,9 @@
 <?php
 define ('PELISCSV','bbdd/peliculas.csv');
+define ('DIRESCSV','bbdd/directores.csv');
+define ('ACTORESCSV','bbdd/actores.csv');
+define ('PELIDIRCSV','bbdd/pelicula_director.csv');
+define ('PELIACTCSV','bbdd/pelicula_actor.csv');
 
 // busca la posiciónj del elemento a través del id
 function buscarPosicion($id, $array){
@@ -10,6 +14,20 @@ function buscarPosicion($id, $array){
     }
     return false;
 
+}
+
+function buscarenPosicionMulti($id, $array){
+    $datos= null;
+    for($i=0; $i<count($array); $i++){
+        if($array[$i][0]== $id){
+            $datos[$i] = $array[$i][1];
+            
+        }
+        //var_dump($datos);
+        //return $datos;
+    }
+    return $datos;
+    
 }
 
 // lee el fichero peliculas.csv
@@ -72,8 +90,7 @@ function crearForm($id, $title, $year, $length){
     
 }
 
-/* borrará la pelicula que le indiquemos mediante el id
- (borrará la linea del fichero donde aparece) */
+// borrará la pelicula que le indiquemos mediante el id (borrará la linea del fichero donde aparece) e indicará mensaje de éxito
 function borrar_pelicula($numId){
     $archivo = fopen(PELISCSV, "r");
     $mensaje = "<div id='exito'>La pelicula ha sido borrada con éxito</div>";
@@ -93,9 +110,9 @@ function borrar_pelicula($numId){
     }
     fclose($archivo);
     $posicion = buscarPosicion($numId, $arrayLineas); // averigua la posicion que hay que borrar
-    $aux = array_splice ( $arrayLineas , $posicion,1);
-    var_dump($aux);
-    var_dump($arrayLineas);
+    array_splice ( $arrayLineas , $posicion,1); // Elimina los datos de la posición que se le indica del array
+    // var_dump($aux); // PRUEBAS
+    // var_dump($arrayLineas); // PRUEBAS
 
     $archivo = fopen(PELISCSV, "w");
     // modifica archivo original
@@ -148,7 +165,14 @@ function editar_pelicula($numid, $dato1, $dato2, $dato3){
     fclose($archivo);
     
 }
-
+function muestraFicha($posicion, $array){ // modificar los nombres de los li
+    echo "<h4>FICHA DE LA PELÍCULA</h4>";
+    echo "<ul>";
+    echo "<li><strong>Título: </strong>".$array[$posicion][1]."</li>";
+    echo "<li><strong>Año: </strong>".$array[$posicion][1]."</li>";
+    echo "<li><strong>Duración: </strong>".$array[$posicion][1]."</li>";
+    echo "</ul>";
+}
 // ESTOY POR AQUI: crear 2 funciones (trozo de arriba que se repite en borrar y editar y trozo de abajo)
 
 ?>
