@@ -1,3 +1,6 @@
+<?php
+include('lib/utils.php');
+?>
 <!DOCTYPE html>
 
 <head>
@@ -18,7 +21,31 @@
     <div class="container">
        <!-- INCLUIR CÓDIGO PHP -->
        <?php
-        echo $_GET['id']; 
+        // el id que llega a través de la url por get
+        $idPeli = $_GET['id']; 
+
+        // lee y guarda en arrays los datos de cada archivo csv
+        $arrayPelis = get_dataCsv(PELISCSV);
+        $arrayAct = get_dataCsv(ACTORESCSV);
+        $arrayDir = get_dataCsv(DIRESCSV);
+        $arrayPA = get_dataCsv(PELIACTCSV);
+        $arrayPD = get_dataCsv(PELIDIRCSV);
+
+        // devuelve el id de los actores con el id de la pelicula
+        $actores = buscarenPosicionMulti($idPeli, $arrayPA);
+        var_dump($actores); // PRUEBAS
+        // devuelve el id de los directores con el id de la pelicula
+        $directores = buscarenPosicionMulti($idPeli, $arrayDir);
+        var_dump($directores) ; // PRUEBAS 
+
+
+
+
+        $posicionPeli = buscarPosicion($idPeli, $arrayPelis);
+        // $posicionAct = buscarPosicion($idAct, $arrayAct) ;
+        // $posicionDir = buscarPosicion($idDir, $arrayDir);
+        muestraFicha($posicionPeli, $arrayPelis);// $posicionAct, $arrayAct, $posicionDir, $arrayDir);
+
        ?>
 
     </div>
