@@ -32,19 +32,21 @@ include('lib/utils.php');
         $arrayPD = get_dataCsv(PELIDIRCSV);
 
         // devuelve el id de los actores con el id de la pelicula
-        $actores = buscarenPosicionMulti($idPeli, $arrayPA);
+        $actores = buscarDatosPeli($idPeli, $arrayPA);
         var_dump($actores); // PRUEBAS
         // devuelve el id de los directores con el id de la pelicula
-        $directores = buscarenPosicionMulti($idPeli, $arrayDir);
+        $directores = buscarDatosPeli($idPeli, $arrayPD);
         var_dump($directores) ; // PRUEBAS 
-
-
-
-
+        
         $posicionPeli = buscarPosicion($idPeli, $arrayPelis);
+        muestraFicha($posicionPeli, $arrayPelis);// $posicionAct, $arrayAct, $posicionDir, $arrayDir);
+        echo "<p>Actores</p>";
+        sacar_Nombre($actores, $arrayAct);
+        echo "<p>Directores</p>";
+        sacar_Nombre($directores, $arrayDir);
         // $posicionAct = buscarPosicion($idAct, $arrayAct) ;
         // $posicionDir = buscarPosicion($idDir, $arrayDir);
-        muestraFicha($posicionPeli, $arrayPelis);// $posicionAct, $arrayAct, $posicionDir, $arrayDir);
+        
 
        ?>
 

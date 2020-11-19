@@ -1,4 +1,5 @@
 <?php
+
 define ('PELISCSV','bbdd/peliculas.csv');
 define ('DIRESCSV','bbdd/directores.csv');
 define ('ACTORESCSV','bbdd/actores.csv');
@@ -15,8 +16,21 @@ function buscarPosicion($id, $array){
     return false;
 
 }
+// Imprime lista de nombres según los ids 
+function sacar_Nombre($arrayIds, $arrayDatos){
 
-function buscarenPosicionMulti($id, $array){
+    for($i=0; $i<count($arrayIds); $i++){
+        for($j=0; $j<count($arrayDatos); $j++){
+            if($arrayIds[$i] == $arrayDatos[$j][0]){
+                echo "<ul>";
+                echo "<li>".$arrayDatos[$j][1]."</li>";
+                echo "</ul>";
+            }
+        }
+    }
+}
+// buscar a traves del id de pelicula, el dato que le corresponde dentro del array 
+function buscarDatosPeli($id, $array){
     $datos= null;
     for($i=0; $i<count($array); $i++){
         if($array[$i][0]== $id){
@@ -29,6 +43,7 @@ function buscarenPosicionMulti($id, $array){
     return $datos;
     
 }
+
 
 // lee el fichero peliculas.csv
 function get_dataCsv($nombreFichero){
@@ -126,9 +141,9 @@ function borrar_pelicula($numId){
 }
 
 // sobreescribirá los campos indicados y mostrará un mensaje al completar la acción.
-function editar_pelicula($numid, $dato1, $dato2, $dato3){
+function editar_pelicula($numid, $dato1, $dato2, $dato3, $nombreFichero){
     
-    $archivo = fopen(PELISCSV, "r");
+    $archivo = fopen($nombreFichero, "r");
     $mensaje = "<div id='exito'>La pelicula ha sido guardada con éxito</div>";
 
     if($archivo) {
@@ -169,8 +184,8 @@ function muestraFicha($posicion, $array){ // modificar los nombres de los li
     echo "<h4>FICHA DE LA PELÍCULA</h4>";
     echo "<ul>";
     echo "<li><strong>Título: </strong>".$array[$posicion][1]."</li>";
-    echo "<li><strong>Año: </strong>".$array[$posicion][1]."</li>";
-    echo "<li><strong>Duración: </strong>".$array[$posicion][1]."</li>";
+    echo "<li><strong>Año: </strong>".$array[$posicion][2]."</li>";
+    echo "<li><strong>Duración: </strong>".$array[$posicion][3]."</li>";
     echo "</ul>";
 }
 // ESTOY POR AQUI: crear 2 funciones (trozo de arriba que se repite en borrar y editar y trozo de abajo)

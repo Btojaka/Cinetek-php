@@ -24,7 +24,7 @@ include('lib/utils.php');
                 $titol = $_GET['titulo'];
                 $any = $_GET['anyo'];
                 $duracio = $_GET['duracion'];
-                editar_pelicula($id, $titol, $any, $duracio);
+                editar_pelicula($id, $titol, $any, $duracio, PELISCSV);
             ?>
     </div>
 </body>
