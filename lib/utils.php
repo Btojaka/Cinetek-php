@@ -1,12 +1,12 @@
 <?php
-
+// constantes
 define ('PELISCSV','bbdd/peliculas.csv');
 define ('DIRESCSV','bbdd/directores.csv');
 define ('ACTORESCSV','bbdd/actores.csv');
 define ('PELIDIRCSV','bbdd/pelicula_director.csv');
 define ('PELIACTCSV','bbdd/pelicula_actor.csv');
 
-// busca la posiciónj del elemento a través del id
+// busca la posición del elemento a través del id
 function buscarPosicion($id, $array){
     for($i=0; $i<count($array); $i++){
         if($array[$i][0]== $id){
@@ -14,8 +14,40 @@ function buscarPosicion($id, $array){
         }
     }
     return false;
-
 }
+
+// function abrirLeerCsv($nombreFichero){
+    
+
+// }
+
+// function abrirEscribirCsv($array, $mens, $nombreFichero){
+    
+// }
+
+// Muestra la parte básica de la ficha de la película 
+function muestraFicha($posicion, $array){ 
+    echo "<h4>FICHA DE LA PELÍCULA</h4>";
+    echo "<ul>";
+    echo "<li><strong>Título: </strong>".$array[$posicion][1]."</li>";
+    echo "<li><strong>Año: </strong>".$array[$posicion][2]."</li>";
+    echo "<li><strong>Duración: </strong>".$array[$posicion][3]."</li>";
+    echo "</ul>";
+}
+
+// buscar a traves del id de pelicula, el id del dato que le corresponde dentro del array 
+function buscarDatosPeli($id, $array){
+    $datos =[]; // aunque esté vacío debe ser un array para que el return no de error
+    $cont = 0;
+    for($i=0; $i<count($array); $i++){
+        if($array[$i][0]== $id){
+            $datos[$cont] = $array[$i][1];
+            $cont++;
+        }
+    }
+    return $datos;
+}
+
 // Imprime lista de nombres según los ids 
 function sacar_Nombre($arrayIds, $arrayDatos){
 
@@ -29,21 +61,6 @@ function sacar_Nombre($arrayIds, $arrayDatos){
         }
     }
 }
-// buscar a traves del id de pelicula, el dato que le corresponde dentro del array 
-function buscarDatosPeli($id, $array){
-    $datos= null;
-    for($i=0; $i<count($array); $i++){
-        if($array[$i][0]== $id){
-            $datos[$i] = $array[$i][1];
-            
-        }
-        //var_dump($datos);
-        //return $datos;
-    }
-    return $datos;
-    
-}
-
 
 // lee el fichero peliculas.csv
 function get_dataCsv($nombreFichero){
@@ -106,9 +123,9 @@ function crearForm($id, $title, $year, $length){
 }
 
 // borrará la pelicula que le indiquemos mediante el id (borrará la linea del fichero donde aparece) e indicará mensaje de éxito
-function borrar_pelicula($numId){
-    $archivo = fopen(PELISCSV, "r");
+function borrar_pelicula($numId, $nombreFichero){
     $mensaje = "<div id='exito'>La pelicula ha sido borrada con éxito</div>";
+    $archivo = fopen($nombreFichero, "r");
 
     if($archivo) {
         $linea = fgetcsv($archivo, ","); // de cada linea coge lo que haya entre "," en este caso
@@ -124,27 +141,26 @@ function borrar_pelicula($numId){
     echo "El fichero no existe";
     }
     fclose($archivo);
-    $posicion = buscarPosicion($numId, $arrayLineas); // averigua la posicion que hay que borrar
-    array_splice ( $arrayLineas , $posicion,1); // Elimina los datos de la posición que se le indica del array
-    // var_dump($aux); // PRUEBAS
-    // var_dump($arrayLineas); // PRUEBAS
+    //abrirLeerCsv($nombreFichero);
 
-    $archivo = fopen(PELISCSV, "w");
+    $posicion = buscarPosicion($numId, $arrayLineas); // averigua la posicion que hay que borrar
+    
+    array_splice ( $arrayLineas , $posicion,1); // Elimina los datos de la posición que se le indica del array
+    $archivo = fopen($nombreFichero, "w");
     // modifica archivo original
     foreach ($arrayLineas as $linea) {
         fputcsv($archivo,$linea,","); // escribe contenido nuevo
     }
     echo $mensaje;
     fclose($archivo);
-
-
+    // abrirEscribirCsv($arrayLineas, $mensaje, $nombreFichero);
 }
 
 // sobreescribirá los campos indicados y mostrará un mensaje al completar la acción.
 function editar_pelicula($numid, $dato1, $dato2, $dato3, $nombreFichero){
     
-    $archivo = fopen($nombreFichero, "r");
     $mensaje = "<div id='exito'>La pelicula ha sido guardada con éxito</div>";
+    $archivo = fopen($nombreFichero, "r");
 
     if($archivo) {
         $linea = fgetcsv($archivo, ","); // de cada linea coge lo que haya entre "," en este caso
@@ -160,34 +176,25 @@ function editar_pelicula($numid, $dato1, $dato2, $dato3, $nombreFichero){
     echo "El fichero no existe";
     }
     fclose($archivo);
-
-
+    //$arrayLineas = abrirLeerCsv($nombreFichero);
+    
     $posicion = buscarPosicion($numid, $arrayLineas); // averigua la posicion que hay que sobreescribir
 
     // reescribimos los datos en la posición del array auxiliar 
     $arrayLineas[$posicion][1]= $dato1;
     $arrayLineas[$posicion][2]= $dato2;
     $arrayLineas[$posicion][3]= $dato3;
-    
-    //var_dump($arrayLineas[$posicion]); // PUEBAS
-    //chmod(PELISCSV, 0777);
-    $archivo = fopen(PELISCSV, "w");
+    $archivo = fopen($nombreFichero, "w");
+
     // modifica archivo original
     foreach ($arrayLineas as $linea) {
         fputcsv($archivo,$linea,","); // escribe contenido nuevo
     }
     echo $mensaje;
     fclose($archivo);
-    
+    //abrirEscribirCsv($arrayLineas, $mensaje, $nombreFichero);
 }
-function muestraFicha($posicion, $array){ // modificar los nombres de los li
-    echo "<h4>FICHA DE LA PELÍCULA</h4>";
-    echo "<ul>";
-    echo "<li><strong>Título: </strong>".$array[$posicion][1]."</li>";
-    echo "<li><strong>Año: </strong>".$array[$posicion][2]."</li>";
-    echo "<li><strong>Duración: </strong>".$array[$posicion][3]."</li>";
-    echo "</ul>";
-}
+
 // ESTOY POR AQUI: crear 2 funciones (trozo de arriba que se repite en borrar y editar y trozo de abajo)
 
 ?>

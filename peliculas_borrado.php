@@ -19,7 +19,7 @@ include('lib/utils.php');
             
             <?php
             $id = $_GET['id'];
-            borrar_pelicula($id);
+            borrar_pelicula($id, PELISCSV);
             ?>
 
     

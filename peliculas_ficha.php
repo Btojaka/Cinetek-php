@@ -19,8 +19,8 @@ include('lib/utils.php');
         <a href="./peliculas.php" class="btn btn-dark">Películas</a>&nbsp;&nbsp;
     </div>
     <div class="container">
-       <!-- INCLUIR CÓDIGO PHP -->
-       <?php
+    <!-- INCLUIR CÓDIGO PHP -->
+    <?php
         // el id que llega a través de la url por get
         $idPeli = $_GET['id']; 
 
@@ -33,22 +33,18 @@ include('lib/utils.php');
 
         // devuelve el id de los actores con el id de la pelicula
         $actores = buscarDatosPeli($idPeli, $arrayPA);
-        var_dump($actores); // PRUEBAS
         // devuelve el id de los directores con el id de la pelicula
         $directores = buscarDatosPeli($idPeli, $arrayPD);
-        var_dump($directores) ; // PRUEBAS 
-        
+                
         $posicionPeli = buscarPosicion($idPeli, $arrayPelis);
         muestraFicha($posicionPeli, $arrayPelis);// $posicionAct, $arrayAct, $posicionDir, $arrayDir);
-        echo "<p>Actores</p>";
+        echo "<p><strong>Actores:</strong></p>";
         sacar_Nombre($actores, $arrayAct);
-        echo "<p>Directores</p>";
+        echo "<p><strong>Directores:</strong></p>";
         sacar_Nombre($directores, $arrayDir);
-        // $posicionAct = buscarPosicion($idAct, $arrayAct) ;
-        // $posicionDir = buscarPosicion($idDir, $arrayDir);
         
 
-       ?>
+    ?>
 
     </div>
 </body>
