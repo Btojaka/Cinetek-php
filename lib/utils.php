@@ -16,15 +16,6 @@ function buscarPosicion($id, $array){
     return false;
 }
 
-// function abrirLeerCsv($nombreFichero){
-    
-
-// }
-
-// function abrirEscribirCsv($array, $mens, $nombreFichero){
-    
-// }
-
 // Muestra la parte básica de la ficha de la película 
 function muestraFicha($posicion, $array){ 
     echo "<h4>FICHA DE LA PELÍCULA</h4>";
@@ -98,7 +89,7 @@ function get_Portadas($nombreArray){
         $carpeta = 'imgs/peliculas/';
         $dir = $carpeta.$archivoJpg;  // Ruta donde se guarda la imagen
         $imgag = "<img src='$dir' alt='Esta es la portada' width = 175 height= 300>";
-        $enlace = "<a href='peliculas_ficha.php?id=$id'>$imgag</a>"; // TIENE QUE LLEVAR A LA FICHA DE LA PELICULA
+        $enlace = "<a href='peliculas_ficha.php?id=$id'>$imgag</a>"; 
         $editar = "<a href='peliculas_form.php?id=$id&nombre=$nombre&anyo=$anyo&duracion=$duracion'><button id='editar'>Editar</button></a>";
         $borrar = "<a href='peliculas_borrado.php?id=$id'><button id='borrar'>Borrar</button></a>";
         $titulo = "<p>$nombre</p>";
@@ -108,10 +99,9 @@ function get_Portadas($nombreArray){
         echo $portada;  
     }
 }
-
+// crear el formulario relleno con datos pelicula y lo muestra
 function crearForm($id, $title, $year, $length){
-    //tener en cuenta la validacion isset... pattern EVITAR CODIGO MALICIOSO html (PARTE CLIENTE Y EN EL SERVIDOR) PRUEBAS
-         // crear el formulario relleno con datos pelicula y lo muestra
+
     $numid = "<input type='hidden' name='id' value= '$id'><br><br>";
     $titulo = "<label for='titulo'>Título:</label><br><input type='text' name='titulo' value= '$title'><br><br>";
     $anyo = "<label for='anyo'>Año:</label><br><input type='number' name='anyo' value= '$year'><br><br>";
@@ -141,7 +131,6 @@ function borrar_pelicula($numId, $nombreFichero){
     echo "El fichero no existe";
     }
     fclose($archivo);
-    //abrirLeerCsv($nombreFichero);
 
     $posicion = buscarPosicion($numId, $arrayLineas); // averigua la posicion que hay que borrar
     
@@ -153,14 +142,17 @@ function borrar_pelicula($numId, $nombreFichero){
     }
     echo $mensaje;
     fclose($archivo);
-    // abrirEscribirCsv($arrayLineas, $mensaje, $nombreFichero);
 }
 
 // sobreescribirá los campos indicados y mostrará un mensaje al completar la acción.
 function editar_pelicula($numid, $dato1, $dato2, $dato3, $nombreFichero){
     
+    // validación del formulario
+
     $mensaje = "<div id='exito'>La pelicula ha sido guardada con éxito</div>";
     $archivo = fopen($nombreFichero, "r");
+
+
 
     if($archivo) {
         $linea = fgetcsv($archivo, ","); // de cada linea coge lo que haya entre "," en este caso
@@ -175,9 +167,7 @@ function editar_pelicula($numid, $dato1, $dato2, $dato3, $nombreFichero){
     } else {
     echo "El fichero no existe";
     }
-    fclose($archivo);
-    //$arrayLineas = abrirLeerCsv($nombreFichero);
-    
+    fclose($archivo);    
     $posicion = buscarPosicion($numid, $arrayLineas); // averigua la posicion que hay que sobreescribir
 
     // reescribimos los datos en la posición del array auxiliar 
@@ -192,9 +182,6 @@ function editar_pelicula($numid, $dato1, $dato2, $dato3, $nombreFichero){
     }
     echo $mensaje;
     fclose($archivo);
-    //abrirEscribirCsv($arrayLineas, $mensaje, $nombreFichero);
 }
-
-// ESTOY POR AQUI: crear 2 funciones (trozo de arriba que se repite en borrar y editar y trozo de abajo)
 
 ?>
